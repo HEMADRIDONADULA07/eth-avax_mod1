@@ -1,30 +1,51 @@
-**HemadriContract - Readme**
 
-This is the readme file for the HemadriContract. The contract contains a single function `division`, which performs a division operation with certain requirements and checks using `require`, `revert`, and `assert` functions.
 
-**License**
-The contract is licensed under the MIT License. Make sure to read and understand the terms of the license before using or modifying the code.
+---
 
-**Prerequisites**
-- Solidity Compiler version 0.8.0 or compatible.
+# Hemadri Token (Example ERC20 Token)
 
-**Function Details**
-The contract contains the following function:
+**Hemadri** is a simple ERC20 token smart contract written in Solidity. It showcases the usage of the `revert`, `require`, and `assert` statements for error handling and control flow in a smart contract. The contract allows the creation of a custom token with the ability to mint new tokens and transfer them between addresses. It also demonstrates the use of modifiers for access control.
 
-1. `division(uint numerator, uint denominator)`: This function takes two parameters `numerator` and `denominator`, both of type `uint` (unsigned integer). It performs the division operation `numerator / denominator` and returns the result as a `uint`.
+## Features
 
-**Requirements and Checks**
-The function contains the following requirements and checks:
+- Mint new tokens by the contract owner using `require` for authorization checks.
+- Transfer tokens between addresses while checking for sufficient balance using `assert` and `revert` statements.
+- Access control through a `onlyOwner` modifier implemented with `require`.
 
-1. `assert(denominator != 0)`: The `assert` function is used to validate that the `denominator` is not equal to zero. If `denominator` is zero, the function execution will be halted, and all state changes will be reverted.
+## Getting Started
 
-2. `require(denominator > 5, "denominator should be greater than 5")`: The `require` function is used to check that the `denominator` is greater than 5. If the condition is not met, the function execution will be halted, and the specified error message will be provided as the reason for the revert.
+1. Install a Solidity development environment, such as [Truffle](https://www.trufflesuite.com/truffle) or [Remix](https://remix.ethereum.org/).
+2. Clone or download this repository to your local machine.
+3. Compile the `hemadri.sol` file using your Solidity development environment.
+4. Deploy the contract to an Ethereum development network of your choice.
+5. Interact with the deployed contract using its provided functions.
 
-**Error Handling**
-1. `revert("Result is too large")`: After performing the division, the function checks if the result is greater than 1000. If the result is greater than 1000, the function will revert with the specified error message. Revert is used here to handle exceptional cases where the result is not within the desired range.
+## Smart Contract Details
 
-**Important Note**
-- The contract uses Solidity version 0.8.0. Ensure that you use a compatible compiler to avoid compilation errors.
+The `hemadri.sol` smart contract is based on the ERC20 standard and extends the `ERC20` contract from the OpenZeppelin library. It emphasizes the use of `revert`, `require`, and `assert` statements for various purposes:
 
-**Disclaimer**
-This contract and readme are provided as-is and may not be suitable for production use without proper auditing and security considerations. Always review and test the contract thoroughly before deploying it in a live environment. The developers of this contract are not liable for any loss or damage resulting from the use or misuse of this contract.
+- The contract creator is assigned as the initial owner of the token.
+- The `onlyOwner` modifier is used with `require` to restrict certain functions to the contract owner.
+- The `mint` function uses `require` to ensure that only the owner can mint new tokens.
+- The `transferTokens` function utilizes `assert` to check for non-zero transfer amounts and `revert` to handle insufficient balances.
+
+## Usage
+
+1. Deploy the contract to an Ethereum development network.
+2. Use a tool like [Remix](https://remix.ethereum.org/) or a web3-enabled application to interact with the deployed contract.
+3. Use the functions provided by the contract:
+   - `mint(address account, uint amount)`: Mint new tokens and assign them to the specified address. Only the owner can call this function.
+   - `transferTokens(address to, uint amount)`: Transfer tokens from the sender's address to the specified address, ensuring valid amounts and balances.
+   - Other standard ERC20 functions like `balanceOf`, `allowance`, `transfer`, and `approve` are also available.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Disclaimer
+
+This smart contract is provided as an example for educational purposes. It is not audited and should not be used in production environments without proper security reviews and testing.
+
+---
+
+Feel free to further customize the README as needed for your project.
