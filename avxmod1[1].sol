@@ -1,17 +1,26 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.9;
 
-contract HemadriContract {
-    function division(uint numerator, uint denominator) public pure returns (uint) {
-        // Using require and assert
-        assert(denominator != 0);
-        require(denominator >5 , "denominator should be greater than 5");
-        uint result = numerator / denominator;
-       
-        if (result > 1000) {
-            revert("Result is too large");//using revert
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+contract hemadri is ERC20 {
+    address public owner;
+    constructor(string memory name, string memory symbol, uint initialSupply) ERC20(name, symbol) {
+        _mint(msg.sender, initialSupply);
+        owner = msg.sender;
+    }
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the contract owner can call this function");//using require
+        _;
+    }
+    function mint(address account, uint amount) public onlyOwner {
+        _mint(account, amount);
+    }
+    function transferTokens(address to, uint amount) public {
+        assert(amount!=0);//using assert
+        if (amount > balanceOf(msg.sender)) {
+            revert("Not enough balance to transfer");//using revert function
         }
-
-        return result;
+        _transfer(msg.sender, to, amount);
     }
 }
