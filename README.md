@@ -46,6 +46,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 This smart contract is provided as an example for educational purposes. It is not audited and should not be used in production environments without proper security reviews and testing.
 
----
-
-Feel free to further customize the README as needed for your project.
